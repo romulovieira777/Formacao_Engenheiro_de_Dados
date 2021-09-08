@@ -1,0 +1,46 @@
+#FORMAÇÃO ENGENHEIRO DE DADOS - PROF. FERNANDO AMARAL
+#baixar arquivo relacional.zip na pasta /home/cloudera/Downloads
+#descompatar arquivo relacional.zip
+unzip relacional.zip
+
+#instalar postgresql 11
+sudo yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-6-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+#instalar pacotes cliente
+sudo yum install postgresql11
+
+#instalar pacotes servidor opcionais
+sudo yum install postgresql11-server
+
+#inicializar e definir inicio automatico
+sudo service postgresql-11 initdb
+sudo chkconfig postgresql-11 on
+sudo service postgresql-11 start
+
+#logar no postresql e criar banco de dados
+sudo -u postgres psql
+create database ed;
+
+#listar banco de dados
+\list
+
+#mudar para ed
+\c ed;
+
+#iniciar a execução dos scripts 1 até 6
+\i /home/cloudera/Downloads/1.CreateTable.sql
+\i /home/cloudera/Downloads/2.InsertClientes.sql
+\i /home/cloudera/Downloads/3.InsertIntoProdutos.sql
+\i /home/cloudera/Downloads/4.InsertIntoVendedores.sql
+\i /home/cloudera/Downloads/5.InsertIntoVendas.sql
+\i /home/cloudera/Downloads/6.InsertItensVenda.sql
+
+#inicar a exeução do script interativo
+#este script não deve ser carregado, mas rodado passo a passo
+#7.InterativoSQL.sql
+
+#listar tabelas
+\dt
+
+#sair
+\q
