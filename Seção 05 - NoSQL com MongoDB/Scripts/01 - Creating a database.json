@@ -1,0 +1,31 @@
+-- Creating a database
+USE dbmidias
+
+-- Inserting data into the collection
+db.posts.insert(
+	{nome: "José", postagem: "Bons Produtos!", data: "30-06-2019"}
+)
+
+db.posts.insert(
+	{nome: "José", postagem: "Loja suja!", data: "30-01-2019"}
+)
+
+db.posts.insert([
+	{nome:"Antonio",postagem:"Minha Bike quebrou", data:"26-05-2019"},
+	{nome:"Maria Silva", postagem:"Encontrei tudo que precisava", data:"14-06-2019"},
+	{nome:"Lucas Andrade", postagem: "Ótimo atendimento!", data: "12-04-2019"}
+])
+
+
+-- Selecting all documents
+db.posts.find()
+
+db.posts.find().pretty()
+
+
+-- Selecting a single document
+db.posts.findOne()
+
+db.posts.findOne({nome: "José"})
+
+db.posts.findOne({nome: "José", postagem: "Bons Produtos!"})

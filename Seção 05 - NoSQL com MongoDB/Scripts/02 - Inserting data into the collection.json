@@ -1,0 +1,29 @@
+-- Inserting data into the collection
+
+db.posts.insert([
+	{nome: "André", postagem: "Produtos caros", data: "12-01-2019", idade: 25},
+	{nome: "Ricardo", postagem: "Produtos caros", data: "14-07-2019", idade: 12}
+])
+
+
+-- Selecting a single document
+
+db.posts.find({postagem: "Produtos caros", idade: {$lte: 12}})
+
+db.posts.find({$or: [{nome: "José"},{nome: "Antonio"}]})
+
+db.posts.find({postagem: {$in: ["Produtos caros", "loja suja!"]}})
+
+db.posts.findOne()
+
+db.posts.find({nome: "José"}, {_id: 0, nome: 0})
+
+db.posts.find().limit(2)
+
+db.posts.find().sort({nome: 1})
+
+db.posts.find().sort({nome: -1})
+
+db.posts.find().sort({nome: -1}).limit(3)
+
+db.posts.find().sort({nome: -1}).limit(3).pretty()
