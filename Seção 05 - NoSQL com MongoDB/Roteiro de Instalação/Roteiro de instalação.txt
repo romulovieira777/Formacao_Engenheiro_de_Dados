@@ -1,0 +1,69 @@
+#Baixar arquivo nosql.zip em cd /home/cloudera/Downloads/
+cd /home/Cloudera/download
+#Copiar arquivo para yum:
+sudo cp mongodb-org-4.0.repo /etc/yum.repos.d
+#Instalação
+sudo yum install -y mongodb-org
+#Inicia serviço:
+sudo service mongod start
+#Garantia de reinicio
+sudo chkconfig mongod on
+#Inicia Shell
+mongo
+
+#mostra banco atual
+db
+#mostra bancos existentes
+show dbs
+
+#cria um banco de dados
+#só será persistido depois de incluir documentos em uma coleção
+use dbvendas;
+#Insere um único cliente
+db.clientes.insert({nome:"José",sobrenome:"da Silva", idade:38})
+#Insere multiplos documentos
+db.clientes.insert([{nome:"Pedro",sobrenome:"Rocha", idade:26},
+{nome:"Maria",sobrenome:"da Silva", idade:37},
+{nome:"Lucas",sobrenome:"Rocha", idade:12}])
+#Encontra todos
+db.clientes.find()
+#Encontra com pretty
+db.clientes.find().pretty()
+#Retorna apenas o primeiro
+db.clientes.findOne()
+#ler documento especifico
+db.clientes.find({nome:"Pedro"})
+#cliente com sobrenome rocha e idade menor ou igual a 12
+db.clientes.find({sobrenome:"Rocha",idade: {$lte: 12}})
+#sobrenome rocha ou maria
+db.clientes.find({$or:[{sobrenome:"Rocha"},{nome: "Maria"}]})
+#projeção, sem id
+db.clientes.find({sobrenome : "Rocha"},{id: 0})
+#sem nome e sobrenome
+db.clientes.find({sobrenome : "Rocha"},{sobrenome: 0, idade: 0})
+#só o nome
+db.clientes.find({sobrenome : "Rocha"},{nome: 1})
+#limite de resultados
+db.clientes.find().limit(2)
+#ordenar crescente
+db.clientes.find().sort({nome:1})
+#ordenar decrescente
+db.clientes.find().sort({nome:-1})
+#atualizar cliente
+db.clientes.find({nome:"Pedro"})
+db.clientes.update({nome:"Pedro"},{$set:{idade:29}})
+#excluir coleção
+db.clientes.drop()
+#testa a exclusão
+db.clientes.drop()
+#fazer backup
+C:\Program Files\MongoDB\Server\4.0\bin>mongodump --db=dbvendas /out:c:/dump
+#excluir o banco de dados
+db.dropDatabase()
+#restaurar backup
+mongorestore /dir:C:\dump\dbvendas /db:dbvendas
+#importar dados
+mongoimport --db dbvendas2 --collection vendas --file C:\Users\webma\Desktop\vendas.json
+#exportar dados
+mongoexport --db dbvendas2 --collection vendas /out:C:\Users\webma\Desktop\vendas.json
+

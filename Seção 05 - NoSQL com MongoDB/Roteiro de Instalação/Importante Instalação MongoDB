@@ -1,0 +1,46 @@
+Importante: Instalação MongoDB
+Olá
+
+Se você tiver problemas para a instalação do Mongo, isso pode ser devido a expiração do certificado da Máquina Virtual.
+
+Como alternativa, execute as etapas abaixo:
+
+
+
+Posicione-se do diretório do yum
+
+cd /etc/yum.repos.d
+
+Se você baixou o arquivo de configuração da aula, exclua ele
+
+sudo rm mongodb-org-4.0.repo
+
+Execute o editor Gedit
+
+sudo gedit mongodb-org-4.4.repo
+
+Cole o seguinte texto no arquivo:
+
+[mongodb-org-4.4]
+name=MongoDB Repository
+baseurl=http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.4/x86_64/
+gpgcheck=0
+enabled=1
+gpgkey=http://www.mongodb.org/static/pgp/server-4.4.asc
+Salve e feche
+
+Instale
+
+sudo yum install -y mongodb-org
+
+Inicie o serviço
+
+sudo service mongod start
+
+Configure reinicio automático
+
+sudo chkconfig mongod on
+
+Acesse o Shell
+
+mongo
