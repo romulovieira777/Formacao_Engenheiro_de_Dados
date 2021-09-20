@@ -1,0 +1,16 @@
+-- Selecting a collection
+db.posts.find(
+	{nome: "André"}
+)
+
+
+-- Updating a document
+db.posts.update(
+	{nome: "André"}, {set:{idade:29}}
+)
+
+
+-- Deleting a document
+db.posts.deleteOne(
+	{nome: "André"}
+)

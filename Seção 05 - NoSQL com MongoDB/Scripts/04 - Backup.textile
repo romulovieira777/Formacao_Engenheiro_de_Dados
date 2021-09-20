@@ -1,0 +1,30 @@
+-- Backup
+
+-- Creating a folder
+sudo mkdir /home/cloudera/bkpmongo
+
+
+-- Creating Backup
+sudo mongodump --out /home/cloudera/bkpmongo/ --db dbmidias
+
+
+-- Restoring Backup
+sudo mongorestore /home/cloudera/bkpmongo
+
+
+-- Creating a folder
+sudo mkdir /home/cloudera/exportmongo
+
+
+-- Exporting a collection
+sudo mongoexport --db dbmidias --collection posts --out /home/cloudera/exportmongo/posts.json
+
+
+-- Checking a collection
+cat /home/cloudera/exportmongo/posts.json
+
+cat /home/cloudera/Downloads/posts.json
+
+
+-- Importing a collection
+mongoimport --dbmidias --collection posts --file /home/cloudera/Downloads/posts.json
