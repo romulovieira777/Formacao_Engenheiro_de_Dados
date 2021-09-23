@@ -1,0 +1,26 @@
+#download do arquivo do site do curso
+#local padrão é /home/cloudera/Downloads
+cd /home/cloudera/Downloads
+#descompatamos o arquivo
+unzip hadoop.zip
+#vizualizar
+cat pesquiza.txt
+cat WordCount.java
+#criar pasta no hdfs
+hdfs dfs -mkdir /contar/
+#copiar o arquivo para a pasta criada
+hdfs dfs -put pesquisa.txt /contar/pesquisa.txt
+
+#rodar map reduce
+hadoop jar /home/cloudera/MRProgramDemo.jar PackageDemo.WordCount  /contar/pesquisa.txt /contar2
+hdfs dfs -ls /contar2
+hdfs dfs -cat /contar2/part-r-00000
+
+
+
+
+
+
+
+
+
