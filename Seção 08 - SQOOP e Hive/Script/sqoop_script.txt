@@ -1,0 +1,97 @@
+#hive
+#beeline, conexão
+beeline
+!connect jdbc:hive2://
+#banco de dados
+show databases;
+create database ed;
+use ed;
+#cria e carrega
+create table dimensaocliente(chavecliente int, idcliente int, cliente string, estado char(2), sexo char(1), status string, datainiciovalidade date, datafimvalidade date) row format delimited fields terminated by ',' location '/user/cloudera/dimensaocliente/';
+#select
+select * from dimensaocliente limit 10;
+#cria e carrega
+create table dimensaotempo(chavetempo int, data date, dia int, mes int, ano int, diasemana int, trimestre int) row format delimited fields terminated by ',' location '/user/cloudera/dimensaotempo/';
+#select
+select * from dimensaotempo limit 10;
+#cria e carrega
+create table dimensaoproduto(chaveproduto int, idproduto int, produto string, datainiciovalidade date, datafimvalidade date) row format delimited fields terminated by ',' location '/user/cloudera/dimensaoproduto/';
+#select
+select * from dimensaoproduto;
+#cria e carrega
+create table dimensaovendedor(chavevendedor int, idvendedor int, nome string, datainiciovalidade date, datafimvalidade date) row format delimited fields terminated by ',' location '/user/cloudera/dimensaovendedor/';
+#select
+select * from dimensaovendedor;
+#cria e carrega
+create table fatovendas (chavevendas int, chavevendedor int, chavecliente int, chaveproduto int,  chavetempo int, quantidade int, valorunitario float, valortotal float, desconto float) row format delimited fields terminated by ',' location '/user/cloudera/fatovendas/';
+#select
+select * from fatovendas limit 10;
+#exibe tabelas
+show tables;
+#verificar banco de dados criado dentro do hive
+hdfs dfs -ls /user/hive/warehouse/
+#hue
+select * from fatovendas limit 10
+select sum(fatovendas.valortotal) from fatovendas 
+select sum(fv.valortotal) from fatovendas fv
+join dimensaovendedor dv on (dv.chavevendedor = fv.chavevendedor)
+where dv.nome = 'Capitolino Bahía'
+select sum(fv.valortotal) from fatovendas fv
+join dimensaovendedor dv on (dv.chavevendedor = fv.chavevendedor)
+join dimensaotempo dt on (fv.chavetempo = dt.chavetempo)
+where dv.nome = 'Capitolino Bahía' and dt.trimestre = 1;
+#criar tabela desnormalizada
+create table des_vendas as 
+select 
+       dc.cliente,
+       dc.estado,
+       dc.sexo,
+       dc.status,
+       fv.quantidade,
+       fv.valorunitario,
+       fv.valortotal,
+       fv.desconto,
+       dp.produto,
+       dt.data,
+       dt.dia,
+       dt.mes,
+       dt.ano,
+       dt.trimestre,
+       dv.nome
+  from dimensaocliente dc
+  join fatovendas fv  on fv.chavecliente = dc.chavecliente
+  join dimensaoproduto dp on dp.chaveproduto = fv.chaveproduto
+  join dimensaotempo dt on dt.chavetempo = fv.chavetempo
+  join dimensaovendedor dv on dv.chavevendedor = fv.chavevendedor;
+#verifica a tabela criada
+select count( *) from des_vendas
+#exemplo arredondamento
+select sum(valortotal) from des_vendas;
+select round(sum(valortotal),2) from des_vendas;
+#particionamento
+#habilita particionamento dinamico
+set hive.exec.dynamic.partition.mode=nonstrict
+#cria tabela
+create table des_vendas_part(quantidade int,valortotal float ) PARTITIONED BY(estado char(2));
+#insere
+INSERT OVERWRITE TABLE des_vendas_part PARTITION(estado)
+SELECT quantidade,valortotal,estado from  des_vendas;
+#consulta
+select * from des_vendas_part limit 10;
+#olhar no hdfs
+hdfs dfs -ls /user/hive/warehouse/ed.db/des_vendas_part/
+hdfs dfs -ls /user/hive/warehouse/ed.db/des_vendas_part/estado=AC
+#bucket
+create table des_vendas_buck(quantidade int,valortotal float, estado char(2) ) clustered by(estado)
+into 4 buckets;
+#insere
+INSERT OVERWRITE TABLE des_vendas_buck 
+SELECT quantidade,valortotal,estado from des_vendas;
+#select
+select * from des_vendas_buck limit 10;
+
+
+
+
+
+
