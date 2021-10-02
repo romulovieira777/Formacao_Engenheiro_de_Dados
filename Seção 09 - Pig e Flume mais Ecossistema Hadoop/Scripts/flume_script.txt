@@ -1,0 +1,33 @@
+#diretorio para source
+mkdir /home/cloudera/flume
+#diretorio para sink
+hdfs dfs -ls /user/flume/
+# componetes do agente
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+# Source
+a1.sources.r1.type = spooldir
+a1.sources.r1.channels = c1
+a1.sources.r1.spoolDir = /home/cloudera/flume
+#a1.sources.r1.fileHeader = true
+a1.sources.r1.pollDelay = 5000
+# Sink
+a1.sinks = k1
+a1.sinks.k1.type = hdfs
+a1.sinks.k1.channel = c1
+a1.sinks.k1.hdfs.path = /user/flume/
+a1.sinks.k1.hdfs.fileType = DataStream
+# Channel
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+# Vincula source e sink com channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+#executar flume
+sudo flume-ng agent --conf conf --conf-file /home/cloudera/example.conf --name a1 -Dflume.root.logger=INFO,console
+
+
+
+

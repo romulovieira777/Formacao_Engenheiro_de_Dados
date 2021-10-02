@@ -1,0 +1,27 @@
+#logar grunt
+pig -x mapreduce
+#carregar dados do HDFS
+dimensaocliente = LOAD '/user/cloudera/dimensaocliente/' USING PigStorage(',') as 
+(chavecliente:int, idcliente:int, cliente:chararray, estado:chararray, sexo:chararray, status:chararray, datainiciovalidade:datetime, datafimvalidade:datetime);   
+fatovendas  = LOAD '/user/cloudera/fatovendas/' USING PigStorage(',') as
+(chavevendas:int, chavevendedor:int, chavecliente:int, chaveproduto:int,  chavetempo:int, quantidade:int, valorunitario:float, valortotal:float, desconto:float);
+#exibir os dados
+dump dimensaocliente; 
+#limitar 10 registros
+dim10 = limit dimensaocliente 10;
+dump dim10;
+#schema
+describe dimensaocliente;
+#agrupa por status
+clienteporstatus = GROUP dimensaocliente by status;
+#join
+juncaocliente = JOIN fatovendas by chavecliente, dimensaocliente by chavecliente;
+#filtro
+dimensaoclientePlatinum = FILTER dimensaocliente BY status == 'Platinum';
+#split - divide em duas relações
+SPLIT dimensaocliente into dimensaoGold if status=='Silver', dimensaoPlatinum if status=='Platinum';
+DUMP dimensaoPlatinum
+#cliente ordenado
+dimensaoclienteorder = ORDER dimensaocliente BY cliente ASC;
+STORE dimensaoclientePlatinum INTO '/user/cloudera/pig/' USING PigStorage(',');
+
