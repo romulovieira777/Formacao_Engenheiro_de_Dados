@@ -8,6 +8,9 @@
 - [Seção 05 - NoSQL com MongoDB](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2005%20-%20NoSQL%20com%20MongoDB)
 - [Seção 06 - NoSQL com Redis](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2006%20-%20NoSQL%20com%20Redis)
 - [Seção 07 - Processamento em Batch com Hadoop](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2007%20-%20Processamento%20em%20Batch%20com%20Hadoop)
+- [Seção 08 - SQOOP e Hive](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2008%20-%20SQOOP%20e%20Hive)
+- [Seção 09 - Pig e Flume: Mais Ecossistema Hadoop](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2009%20-%20Pig%20e%20Flume%20mais%20Ecossistema%20Hadoop)
+- [Seção 10 - Processamento Real Time]()
 
 
 Link para o curso: [Udemy](https://www.udemy.com/course/engenheiro-de-dados/)

@@ -1,0 +1,33 @@
+
+
+#carrega arquivo texto - lazy evaluation - so carrega quando necessário
+pesquisa = sc.textFile("file:///home/cloudera/Downloads/pesquisa.txt")
+pesquisa.take(5)
+
+
+
+contagem = pesquisa.flatMap(lambda palavra: palavra.split(" ")) 
+contagem = contagem.map(lambda pal: (pal, 1)) 
+contagem = contagem.reduceByKey(lambda a, b: a + b)
+
+contagem
+
+
+contagem.take(5)
+
+
+#salva como arquivo sequencial - diretorio onde salva
+#ele não pode existir!
+contagem.saveAsTextFile("conta")
+
+quit()
+
+hdfs dfs -ls /user/cloudera/conta/
+hdfs dfs -cat /user/cloudera/conta/part-00000
+
+#excluir diretorio
+sudo hdfs dfs -rm -r /user/cloudera/conta
+
+
+
+
