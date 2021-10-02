@@ -14,4 +14,4 @@ contagem = contagem.reduceByKey(lambda a, b: a + b)
 #imprime
 contagem.pprint()
 ssc.start()             
-ssc.awaitTermination()  
+ssc.awaitTermination()
