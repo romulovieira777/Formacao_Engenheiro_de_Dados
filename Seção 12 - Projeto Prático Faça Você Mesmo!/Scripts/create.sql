@@ -1,0 +1,48 @@
+
+CREATE TABLE CLIENTES
+(
+    IDCLIENTE integer NOT NULL,
+    CPF character varying(11)  NOT NULL,
+    CNH character varying(11)  NOT NULL,
+    VALIDADECNH date NOT NULL,
+    NOME character varying(150) NOT NULL,
+    DATACADASTRO date NOT NULL,
+    DATANASCIMENTO date NOT NULL,
+    TELEFONE character varying(11) ,
+    STATUS character varying(7)  NOT NULL,
+    CONSTRAINT CLIENTES_pkey PRIMARY KEY (IDCLIENTE)
+);
+
+CREATE TABLE DESPACHANTES
+(
+    IDDESPACHANTE integer NOT NULL,
+    NOME character varying(150) NOT NULL,
+    STATUS character varying(7) NOT NULL,
+    FILIAL character varying(150) NOT NULL,
+    CONSTRAINT DESPACHANTES_pkey PRIMARY KEY (IDDESPACHANTE)
+);
+
+CREATE TABLE VEICULOS
+(
+    IDVEICULO integer NOT NULL,
+    DATAAQUISICAO date NOT NULL,
+    ANO integer NOT NULL,
+    MODELO character varying(150) NOT NULL,
+    PLACA character varying(10) NOT NULL,
+    STATUS character varying(12) NOT NULL,
+    DIARIA numeric(10,2) NOT NULL,
+    CONSTRAINT VEICULOS_pkey PRIMARY KEY (IDVEICULO)
+);
+
+CREATE TABLE LOCACAO
+(
+    IDLOCACAO integer NOT NULL,
+    IDCLIENTE integer NOT NULL references CLIENTES (IDCLIENTE),
+    IDDESPACHANTE integer NOT NULL references DESPACHANTES (IDDESPACHANTE),
+    IDVEICULO integer NOT NULL references VEICULOS (IDVEICULO),
+    DATALOCACAO date NOT NULL,
+    DATAENTREGA date,
+    TOTAL  numeric(10,2) ,
+    CONSTRAINT LOCACAO_pkey PRIMARY KEY (IDLOCACAO, IDCLIENTE, IDDESPACHANTE)
+);
+
