@@ -11,7 +11,7 @@
 - [Seção 08 - SQOOP e Hive](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2008%20-%20SQOOP%20e%20Hive)
 - [Seção 09 - Pig e Flume: Mais Ecossistema Hadoop](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2009%20-%20Pig%20e%20Flume%20mais%20Ecossistema%20Hadoop)
 - [Seção 10 - Processamento Real Time](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2010%20-%20Processamento%20Real%20Time)
-- [Seção 11 - Aspectos Gerais sobre Engenharia de Dados](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2011%20-%20Aspectos%20Gerais%20sobre%20Engenharia%20de%20Dados/Slides)
+- [Seção 11 - Aspectos Gerais sobre Engenharia de Dados](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2011%20-%20Aspectos%20Gerais%20sobre%20Engenharia%20de%20Dados)
 - [Seção 12 - Projeto Prático Faça Você Mesmo!](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2012%20-%20Projeto%20Pr%C3%A1tico%20Fa%C3%A7a%20Voc%C3%AA%20Mesmo!)
 - [Seção 13 - Curso Básico de Linux](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2013%20-%20Curso%20B%C3%A1sico%20de%20Linux)
 - [Seção 14 - Encerramento](https://github.com/romulovieira777/Formacao_Engenheiro_de_Dados/tree/main/Se%C3%A7%C3%A3o%2014%20-%20Encerramento)
